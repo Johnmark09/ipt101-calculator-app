@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+</head>
+    <style>
+    
+    *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    }
+
+    body{
+        min-height: 100vh;
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+        background: linear-gradient(45deg , #00203FFF, #ADEFD1FF);
+    }
+
+
+    .calculator-body {
+        padding: 15px;
+        box-shadow: 0 0 15px;
+        border: 2px solid rgb(116, 114, 144);
+        border-radius: 20px;
+    }
+
+    .display-bar input{
+        width: 350px;
+        border: none;
+        outline: none;
+        padding: 20px;
+        margin: 10px;
+        background: transparent;
+        color: #fff;
+        font-size: 40px;
+        text-align: right;
+        cursor: pointer;
+        font-weight: 500px;
+    }
+
+    input ::placeholder{
+        color: #fff;
+    }
+
+    button{
+        width: 70px;
+        height: 70px;
+        margin: 10px;
+        background: transparent;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        border: 0;
+        border-radius: 20px;
+        box-shadow: -5px -3px 15px #00203FFF;
+        outline: 1px solid #00203FFF;
+        outline-offset: 2px;
+        cursor: pointer;
+
+    }
+
+    button:hover{
+        background-color:rgb(108, 229, 174);
+        color: #00203FFF;
+    }
+
+    button:active{
+        background-color: #00203FFF;
+        box-shadow: 0 5px rgb(7, 24, 48);
+        transform: translateY(1px);
+        color: #ADEFD1FF;
+    }
+
+    .non-btn{
+        color: #fff;
+        background: #00203FFF;
+    }
+
+    .rows .equal-btn{
+        width: 70px;
+        height: 70px;
+        margin: 10px;
+        background-color: rgb(230, 78, 23);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        border: 0;
+        border-radius: 20px;
+        box-shadow: -5px -3px 15px #00203FFF;
+        outline: 1px solid #00203FFF;
+        outline-offset: 2px;
+        cursor: pointer;
+    }
+
+    .rows .equal-btn:hover{
+        background-color:rgb(108, 229, 174);
+        color: #00203FFF;
+    }
+
+    .rows .equal-btn:active{
+        box-shadow: 0 5px rgb(10, 25, 47);
+        transform: translateY(4px);
+        background-color: #00203FFF;
+        color: #ADEFD1FF;
+    }
+    
+    
+    @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .rows button {
+        width: calc(25% - 20px); 
+        margin: 5px; 
+    }
+
+    .display-bar input {
+        width: calc(100% - 40px); 
+    }
+
+    .row .equal-btn {
+        width: calc(50% - 10px);
+        margin: 5px;
+    }
+}
+
+    
+    </style>
+    
+<body>
+    <div class="calculator-body">
+        <div class="display-bar">
+            <input type="text" id="result" placeholder="0" value="0" disabled> 
+        </div>
+        <div class="rows">
+            <button type="button" value="AC"class="non-btn" onclick="clearInput()">AC</button>
+            <button type="button" value="⌫" class="non-btn" onclick="deleteOne()">⌫</button>
+            <button type="button" value="%" class="non-btn" onclick="percentage('%')">%</button>
+            <button type="button" value="/" class="non-btn" onclick="divide()">/</button>
+        </div>
+        <div class="rows">
+            <button type="button" value="7" onclick="appendNumber(7)">7</button>
+            <button type="button" value="8" onclick="appendNumber(8)">8</button>
+            <button type="button" value="9" onclick="appendNumber(9)">9</button>
+            <button type="button" value="x" class="non-btn" onclick="multiply()">x</button>
+        </div>
+        <div class="rows">
+            <button type="button" value="4" onclick="appendNumber(4)">4</button>
+            <button type="button" value="5" onclick="appendNumber(5)">5</button>
+            <button type="button" value="6" onclick="appendNumber(6)">6</button>
+            <button type="button" value="+" class="non-btn" onclick="add()">+</button>
+        </div>
+        <div class="rows">
+            <button type="button" value="1" onclick="appendNumber(1)">1</button>
+            <button type="button" value="2" onclick="appendNumber(2)">2</button>
+            <button type="button" value="" onclick="appendNumber(3)">3</button>
+            <button type="button" value="-" class="non-btn" onclick="subtract()">-</button>
+        </div>
+         <div class="rows">
+            <button type="button" value="00" onclick="appendNumber('00')">00</button>
+            <button type="button" value="0" onclick="appendNumber(0)">0</button>
+            <button type="button" value="." onclick="appendNumber('.')"><div class="">.</div></button>
+            <button type="button" value="=" class="equal-btn" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <script>
+        let currentInput = '';
+        let currentOperation = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function divide() {
+            currentOperator = '/';
+            currentInput += currentOperator;
+            document.getElementById('result').value = currentInput;
+        }
+        
+
+        function multiply(){
+            currentOperation = '*';
+            currentInput += currentOperation;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function subtract(){
+            currentOperation = '-';
+            currentInput += currentOperation;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function add(){
+            currentOperation = '+';
+            currentInput += currentOperation;
+            document.getElementById('result').value = currentInput;
+        }
+        function calculate() {
+            const result = eval(currentInput);
+            document.getElementById('result').value = result;
+            currentInput = result.toString();
+            currentOperator = '';
+        }
+        
+        function clearInput() {
+            currentInput = '';
+            currentOperation = '';
+            document.getElementById('result').value = '';
+        }
+
+        function deleteOne() {
+            currentInput = currentInput.slice(0, -1);
+            document.getElementById('result').value = currentInput;
+        }
+        
+        function percentage() {
+          let per = currentInput/100;
+          document.getElementById('result').value = per;
+        }
+
+    </script>
+
+</body>
+</html>
